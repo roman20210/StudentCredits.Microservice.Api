@@ -32,8 +32,9 @@ namespace StudentCredits.Microservice.Api.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var student = await _context.Students
-                                        .Include(x => x.StudentSubjects)
-                                        .FirstOrDefaultAsync(x => x.Id == id);
+                                        .Include(s => s.StudentSubjects)
+                                            .ThenInclude(ss => ss.Subject)
+                                        .FirstOrDefaultAsync(s => s.Id == id);
 
             if (student == null)
                 return NotFound(new { message = "Estudiante no encontrado" });
