@@ -1,0 +1,6 @@
+@StudentCredits.Microservice.Api_HostAddress = http://localhost:5296
+
+GET {{StudentCredits.Microservice.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
