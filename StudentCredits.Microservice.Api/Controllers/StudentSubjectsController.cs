@@ -87,5 +87,21 @@ namespace StudentCredits.Microservice.Api.Controllers
 
             return Ok("Materias inscritas correctamente.");
         }
+
+        [HttpGet("{subjectId}/classmates/{studentId}")]
+        public IActionResult GetClassmates(int subjectId, int studentId)
+        {
+            var classmates = _context.StudentSubjects
+                .Where(ss => ss.SubjectId == subjectId && ss.StudentId != studentId)
+                .Select(ss => new
+                {
+                    ss.Student.Id,
+                    ss.Student.Name
+                })
+                .ToList();
+
+            return Ok(classmates);
+        }
+
     }
 }
